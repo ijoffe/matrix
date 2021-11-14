@@ -63,12 +63,14 @@ class Matrix:
 
         # Ensure argument passed in is valid
         assert isinstance(values, list), "Argument must be a list."
+
         # Instantiate an empty matrix
         self.values = []
         self.__m = 0
         self.__n = 0
         self.add_rows(values)    # Add rows
         self.check_validity()    # Ensure matrix is valid
+        
         return
 
     def __str__(self):
