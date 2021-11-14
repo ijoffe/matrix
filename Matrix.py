@@ -33,18 +33,20 @@ class Matrix:
         delete_row(row) :
             deletes a specified row of the matrix
         add_column(column) :
+            adds a column of numbers to the matrix
         add_columns(columns) :
+            adds a list of columns to the matrix
         delete_column(column) :
+            deletes a specified column of the matrix
 
     Example Usage
     -------------
-        A = Matrix()    # Empty matrix
-        B = Matrix([[1,2,3],[4,5,6],[7,8,9]])    # 3 x 3 matrix
-        C = Matrix([[1,2,3]])    # Row vector
-        D = Matrix([[1],[2],[3]])    # Column vector
+        A = Matrix([[1,2,3],[4,5,6],[7,8,9]])    # 3 x 3 matrix
+        B = Matrix([[1,2,3]])    # Row vector
+        C = Matrix([[1],[2],[3]])    # Column vector
     """
 
-    def __init__(self, values=[]):
+    def __init__(self, values):
         """
         Instantiates the matrix, assigning all the attributes of the matrix
         either as an empty matrix or based on the inputted values.
@@ -52,8 +54,7 @@ class Matrix:
         Parameters
         ----------
         values : list of lists of integer/floating point numbers
-            elements to be placed in the matrix, default is empty to create
-            an empty matrix
+            elements to be placed in the matrix in the form of row vectors
 
         Returns
         -------
@@ -66,9 +67,8 @@ class Matrix:
         self.values = []
         self.__m = 0
         self.__n = 0
-        if values:
-            self.add_rows(values)    # Add rows if provided
-            self.check_validity()    # Ensure matrix is valid
+        self.add_rows(values)    # Add rows
+        self.check_validity()    # Ensure matrix is valid
         return
 
     def __str__(self):
@@ -86,14 +86,13 @@ class Matrix:
                 human-readable form
         """
 
-        # Ensure the matrix is not empty
-        assert self.values, "Matrix must not be empty."
         # Determine the largest number of characters among all the elements
         maxLength = 0
         for i in self.values:
             for j in i:
                 if len(str(j)) > maxLength:    # Check if longest number
                     maxLength = len(str(j))    # Mark a new maximum length
+
         # Pad each element with necessary whitespace for readablity
         stringValues = []
         for i in self.values:
@@ -103,6 +102,7 @@ class Matrix:
                 # according to the largest length seen
                 rowValues.append(str(j).rjust(maxLength))
             stringValues.append(rowValues)
+
         # Join strings representing each eleemnt into one single string
         matrixString = []
         for i in stringValues:
@@ -110,6 +110,7 @@ class Matrix:
             matrixString.append(" ".join(i))
         # Join each row into a newline-separated string
         matrixString = "\n".join(matrixString)
+
         return(matrixString)
 
     def __repr__(self):
@@ -130,6 +131,7 @@ class Matrix:
         m, n = self.get_size()
         matrixString = "{} x {} Matrix object with id of {}.".format(
             m, n, str(id(self)))
+
         return(matrixString)
 
     def get_size(self):
@@ -149,6 +151,7 @@ class Matrix:
         """
 
         m, n = self.__m, self.__n    # Get info from private attributes
+
         return(m, n)
 
     def get_value(self, row, column):
@@ -175,7 +178,9 @@ class Matrix:
         # Ensure matrix is big enough to have the specified index
         assert row <= m and column <= n, \
             "Matrix must be defined at the given location."
+
         value = self.values[row-1][column-1]    # Index into matrix
+
         return(value)
 
     def set_value(self, row, column, value):
@@ -205,8 +210,10 @@ class Matrix:
         # Ensure matrix is big enough to have the specified index
         assert row <= m and column <= n, \
             "Matrix must be defined at the given location."
+
         self.values[row-1][column-1] = value    # Update value in matrix
         self.check_validity()    # Double check that matrix is still valid
+
         return
 
     def check_validity(self):
@@ -225,15 +232,14 @@ class Matrix:
         """
 
         m, n = self.get_size()
-        # Only check matrix if it is not empty
-        if self.values:
-            for i in self.values:
-                # Terminate if the rows are of different length
-                assert len(i) == n, "Rows must be of same length."
-                for j in i:
-                    # Terminate if any element is not a number
-                    assert isinstance(j, float) or isinstance(j, int), \
-                        "Elements must be numbers."
+        for i in self.values:
+            # Terminate if the rows are of different length
+            assert len(i) == n, "Rows must be of same length."
+            for j in i:
+                # Terminate if any element is not a number
+                assert isinstance(j, float) or isinstance(j, int), \
+                    "Elements must be numbers."
+
         return
 
     def add_row(self, row):
@@ -259,18 +265,20 @@ class Matrix:
         # Ensure argument passed in is valid
         assert isinstance(row, list), "Argument must be a list."
         m, n = self.get_size()
+        # Only add if the new row is the same length as the existing ones
         if self.values:
-            # Only add if the new row is the same length as the existing ones
             assert len(row) == n, "Rows must be of same length."
+
         self.values.append(row)    # Add the new row
         self.__m += 1    # Update number of rows
         self.__n = len(row)    # Update number of columns
         self.check_validity()    # Double check that matrix is still valid
+
         return
 
     def add_rows(self, rows):
         """
-        Appends more rows to the bottom of the existing matrix.
+        Appends multiple rows to the bottom of the existing matrix.
 
         Parameters
         ----------
@@ -289,9 +297,11 @@ class Matrix:
 
         # Ensure argument is valid
         assert isinstance(rows, list), "Argument must be a list."
+
         for i in rows:
             self.add_row(i)    # Add row by row
         self.check_validity()    # Double check that matrix is still valid
+
         return
 
     def delete_row(self, row):
@@ -305,7 +315,7 @@ class Matrix:
 
         Returns
         -------
-            None, but updates the matrix elements
+            None, but updates the existing matrix
         """
 
         # Ensure argument is valid
@@ -313,14 +323,104 @@ class Matrix:
         m, n = self.get_size()
         # Ensure matrix is big enough to have the specified row
         assert row <= m, "Matrix must be defined at the given location."
+        # Ensure matrix would still exist after deleting the row
+        assert m != 1, "Matrix must have more than one row."
+
         del self.values[row-1]    # Remove the list for that row
+        self.__m -= 1
+        self.check_validity()    # Double check that matrix is still valid
+
         return
 
     def add_column(self, column):
-        pass
+        """
+        Appends a single column to the end of the matrix.
+
+        Parameters
+        ----------
+            column : list of integer/floating point numbers
+                elements of the column to be added to the matrix
+
+        Returns
+        -------
+            None, but updates the existing matrix
+
+        See Also
+        --------
+            add_columns(columns) :
+                wrapper function that appends multiple columns at once by
+                calling this function repeatedly
+        """
+
+        # Ensure argument passed in is valid
+        assert isinstance(column, list), "Argument must be a list."
+        m, n = self.get_size()
+        # Only add if the new column is the same length as the number of
+        # rows in the existing matrix
+        assert len(column) == m, "Columns must be of same length."
+
+        for i in range(len(self.values)):
+            self.values[i].append(column[i])    # Add the new column
+        self.__m = len(column)    # Update number of rows
+        self.__n += 1    # Update number of columns
+        self.check_validity()    # Double check that matrix is still valid
+
+        return
 
     def add_columns(self, columns):
-        pass
+        """
+        Appends multiple columns to the end of the matrix.
+
+        Parameters
+        ----------
+            columns : list of lists of integer/floating point numbers
+                elements of the columnss to be added to the matrix
+
+        Returns
+        -------
+            None, but updates the existing matrix
+
+        See Also
+        --------
+            add_column(column) :
+                adds each individual column from the columns variable
+        """
+
+        # Ensure argument is valid
+        assert isinstance(columns, list), "Argument must be a list."
+
+        for i in columns:
+            self.add_column(i)    # Add column by column
+        self.check_validity()    # Double check that matrix is still valid
+
+        return
 
     def delete_column(self, column):
-        pass
+        """
+        Removes a specified column of the matrix, moving all columns to the
+        right to the left by one.
+
+        Parameters
+        ----------
+            column : integer
+                the number of the column to be removed
+
+        Returns
+        -------
+            None, but updates the existing matrix
+        """
+
+        # Ensure argument is valid
+        assert isinstance(column, int), "Column index must be an integer."
+        m, n = self.get_size()
+        # Ensure matrix is big enough to have the specified column
+        assert column <= n, "Matrix must be defined at the given location."
+        # Ensure matrix would still exist after deleting the column
+        assert n != 1, "Matrix must have more than one column."
+
+        for i in range(len(self.values)):
+            del self.values[i][column-1]
+        self.__n -= 1
+        self.check_validity()    # Double check that matrix is still valid
+
+        return
