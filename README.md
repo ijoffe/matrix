@@ -13,7 +13,7 @@ This repository contains the code for a Matrix() class in Python, allowing for t
 All code contained is written in Python 3.6. I created all the code here using my personal virtual machine, running the Ubuntu distribution of the Linux operating system, using Sublime Text editor and the Linux terminal.
 
 ## Setup
-Currently, the program can only be used through a Python interpreter. Upon entering the Python interpreter using << python3 >> in the terminal window, you can import the class using << from Matrix import Matrix >> and begin to use the functionality of the class by instantiating objects (for example, << A = Matrix() >> or << B = Matrix([[1,2,3],[4,5,6],[7,8,9]]) >>).
+Currently, the program can only be used through a Python interpreter. Upon entering the Python interpreter using << python3 >> in the terminal window, you can import the class using << from matrix import Matrix >> and begin to use the functionality of the class by instantiating objects (for example, << A = Matrix([[0]]) >> or << B = Matrix([[1,2,3],[4,5,6],[7,8,9]]) >>).
 
 ## Inspiration
 My first introduction to computer programming was in my first year of the Engineering program at the University of Alberta. All students had to take ENCMP 100, a coding class based around the language MATLAB, short for matrix laboratory. As the name suggests, much of what one can do in this language, especially what we focused on for general engineering purposes in that class, revolves around the built-in matrix data type. 
