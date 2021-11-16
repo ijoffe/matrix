@@ -1,4 +1,5 @@
 # Made by Isaac Joffe
+# TODO: add robust way ofensuring input is valid (elements are numbers)
 
 
 class Matrix:
@@ -62,7 +63,7 @@ class Matrix:
         """
 
         # Ensure argument passed in is valid
-        assert isinstance(values, list), "Argument must be a list."
+        assert isinstance(values, list) and values, "Argument must be a list."
 
         # Instantiate an empty matrix
         self.values = []
@@ -105,7 +106,7 @@ class Matrix:
                 rowValues.append(str(j).rjust(maxLength))
             stringValues.append(rowValues)
 
-        # Join strings representing each eleemnt into one single string
+        # Join strings representing each element into one single string
         matrixString = []
         for i in stringValues:
             # Join elements of each row into a space-separated string
@@ -178,7 +179,7 @@ class Matrix:
             "Location must be an integer value."
         m, n = self.get_size()
         # Ensure matrix is big enough to have the specified index
-        assert row <= m and column <= n, \
+        assert row > 0 and column > 0 and row <= m and column <= n, \
             "Matrix must be defined at the given location."
 
         value = self.values[row-1][column-1]    # Index into matrix
@@ -210,7 +211,7 @@ class Matrix:
             "Value must be a number."
         m, n = self.get_size()
         # Ensure matrix is big enough to have the specified index
-        assert row <= m and column <= n, \
+        assert row > 0 and column > 0 and row <= m and column <= n, \
             "Matrix must be defined at the given location."
 
         self.values[row-1][column-1] = value    # Update value in matrix
@@ -235,6 +236,7 @@ class Matrix:
 
         m, n = self.get_size()
         for i in self.values:
+            assert i, "Matrix must not be empty."
             # Terminate if the rows are of different length
             assert len(i) == n, "Rows must be of same length."
             for j in i:
