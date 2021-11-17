@@ -63,7 +63,14 @@ class Matrix:
         """
 
         # Ensure argument passed in is valid
-        assert isinstance(values, list) and values, "Argument must be a list."
+        assert values and isinstance(values, list), \
+            "Argument must be a list of lists of numbers."
+        for i in values:
+            assert i and isinstance(i, list), \
+                "Argument must be a list of lists of numbers."
+            for j in i:
+                assert isinstance(j, int) or isinstance(j, float), \
+                    "Argument must be a list of lists of numbers."
 
         # Instantiate an empty matrix
         self.values = []
@@ -178,7 +185,6 @@ class Matrix:
         assert isinstance(row, int) and isinstance(column, int), \
             "Location must be an integer value."
         m, n = self.get_size()
-        # Ensure matrix is big enough to have the specified index
         assert row > 0 and column > 0 and row <= m and column <= n, \
             "Matrix must be defined at the given location."
 
@@ -210,7 +216,6 @@ class Matrix:
         assert isinstance(value, int) or isinstance(value, float), \
             "Value must be a number."
         m, n = self.get_size()
-        # Ensure matrix is big enough to have the specified index
         assert row > 0 and column > 0 and row <= m and column <= n, \
             "Matrix must be defined at the given location."
 
@@ -267,10 +272,13 @@ class Matrix:
         """
 
         # Ensure argument passed in is valid
-        assert isinstance(row, list), "Argument must be a list."
+        assert row and isinstance(row, list), \
+            "Argument must be a list of numbers."
+        for i in row:
+            assert isinstance(i, int) or isinstance(i, float), \
+                "Argument must be a list of numbers."
         m, n = self.get_size()
-        # Only add if the new row is the same length as the existing ones
-        if self.values:
+        if self.values:    # Since it may be the first row
             assert len(row) == n, "Rows must be of same length."
 
         self.values.append(row)    # Add the new row
@@ -300,7 +308,14 @@ class Matrix:
         """
 
         # Ensure argument is valid
-        assert isinstance(rows, list), "Argument must be a list."
+        assert rows and isinstance(rows, list), \
+            "Argument must be a list of lists of numbers."
+        for i in rows:
+            assert i and isinstance(i, list), \
+                "Argument must be a list of lists of numbers."
+            for j in i:
+                assert isinstance(j, int) or isinstance(j, float), \
+                    "Argument must be a list of lists of numbers."
 
         for i in rows:
             self.add_row(i)    # Add row by row
@@ -325,9 +340,8 @@ class Matrix:
         # Ensure argument is valid
         assert isinstance(row, int), "Row index must be an integer."
         m, n = self.get_size()
-        # Ensure matrix is big enough to have the specified row
-        assert row <= m, "Matrix must be defined at the given location."
-        # Ensure matrix would still exist after deleting the row
+        assert row > 0 and row <= m, \
+            "Matrix must be defined at the given location."
         assert m != 1, "Matrix must have more than one row."
 
         del self.values[row-1]    # Remove the list for that row
@@ -357,10 +371,12 @@ class Matrix:
         """
 
         # Ensure argument passed in is valid
-        assert isinstance(column, list), "Argument must be a list."
+        assert column and isinstance(column, list), \
+            "Argument must be a list of numbers."
+        for i in column:
+            assert isinstance(i, int) or isinstance(i, float), \
+                "Argument must be a list of numbers."
         m, n = self.get_size()
-        # Only add if the new column is the same length as the number of
-        # rows in the existing matrix
         assert len(column) == m, "Columns must be of same length."
 
         for i in range(len(self.values)):
@@ -391,7 +407,14 @@ class Matrix:
         """
 
         # Ensure argument is valid
-        assert isinstance(columns, list), "Argument must be a list."
+        assert columns and isinstance(columns, list), \
+            "Argument must be a list of lists of numbers."
+        for i in columns:
+            assert i and isinstance(i, list), \
+                "Argument must be a list of lists of numbers."
+            for j in i:
+                assert isinstance(j, int) or isinstance(j, float), \
+                    "Argument must be a list of lists of numbers."
 
         for i in columns:
             self.add_column(i)    # Add column by column
@@ -417,9 +440,8 @@ class Matrix:
         # Ensure argument is valid
         assert isinstance(column, int), "Column index must be an integer."
         m, n = self.get_size()
-        # Ensure matrix is big enough to have the specified column
-        assert column <= n, "Matrix must be defined at the given location."
-        # Ensure matrix would still exist after deleting the column
+        assert column > 0 and column <= n, \
+            "Matrix must be defined at the given location."
         assert n != 1, "Matrix must have more than one column."
 
         for i in range(len(self.values)):

@@ -101,11 +101,11 @@ class TestMatrix(unittest.TestCase):
         return
 
     def test_errors(self):
+        A = Matrix([[1,2,3],[4,5,6],[7,8,9]])
         with self.assertRaises(AssertionError):
             Matrix([[]])
         with self.assertRaises(AssertionError):
             Matrix([[0],[0,0]])
-        A = Matrix([[1,2,3],[4,5,6],[7,8,9]])
         with self.assertRaises(AssertionError):
             A.get_value(5,5)
         with self.assertRaises(AssertionError):
@@ -127,6 +127,10 @@ class TestMatrix(unittest.TestCase):
         with self.assertRaises(AssertionError):
             A.set_value("hello","world","hello")
         with self.assertRaises(AssertionError):
+            A.add_row(0)
+        with self.assertRaises(AssertionError):
+            A.add_column(0)
+        with self.assertRaises(AssertionError):
             A.add_row([])
         with self.assertRaises(AssertionError):
             A.add_column([])
@@ -134,16 +138,42 @@ class TestMatrix(unittest.TestCase):
             A.add_row([0,0])
         with self.assertRaises(AssertionError):
             A.add_column([0,0])
-            '''
         with self.assertRaises(AssertionError):
             A.add_row([0,0,"hello"])
         with self.assertRaises(AssertionError):
             A.add_column([0,0,"hello"])
-            '''
+        with self.assertRaises(AssertionError):
+            A.add_rows(0)
+        with self.assertRaises(AssertionError):
+            A.add_columns(0)
+        with self.assertRaises(AssertionError):
+            A.add_rows([])
+        with self.assertRaises(AssertionError):
+            A.add_columns([])
         with self.assertRaises(AssertionError):
             A.add_rows([[]])
         with self.assertRaises(AssertionError):
             A.add_columns([[]])
+        with self.assertRaises(AssertionError):
+            A.add_rows([[0,0]])
+        with self.assertRaises(AssertionError):
+            A.add_columns([[0,0]])
+        with self.assertRaises(AssertionError):
+            A.add_rows([[0,0,"hello"]])
+        with self.assertRaises(AssertionError):
+            A.add_columns([[0,0,"hello"]])
+        with self.assertRaises(AssertionError):
+            A.delete_row(0)
+        with self.assertRaises(AssertionError):
+            A.delete_column(0)
+        with self.assertRaises(AssertionError):
+            A.delete_row(5)
+        with self.assertRaises(AssertionError):
+            A.delete_column(5)
+        with self.assertRaises(AssertionError):
+            A.delete_row(1.5)
+        with self.assertRaises(AssertionError):
+            A.delete_column(1.5)
         return
 
 
