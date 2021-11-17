@@ -125,7 +125,7 @@ class TestMatrix(unittest.TestCase):
         with self.assertRaises(AssertionError):
             A.get_value("hello","world")
         with self.assertRaises(AssertionError):
-            A.set_value("hello","world","hello")
+            A.set_value("hello","world","hello world")
         with self.assertRaises(AssertionError):
             A.add_row(0)
         with self.assertRaises(AssertionError):
@@ -139,9 +139,9 @@ class TestMatrix(unittest.TestCase):
         with self.assertRaises(AssertionError):
             A.add_column([0,0])
         with self.assertRaises(AssertionError):
-            A.add_row([0,0,"hello"])
+            A.add_row([0,0,"hello world"])
         with self.assertRaises(AssertionError):
-            A.add_column([0,0,"hello"])
+            A.add_column([0,0,"hello world"])
         with self.assertRaises(AssertionError):
             A.add_rows(0)
         with self.assertRaises(AssertionError):
@@ -159,9 +159,9 @@ class TestMatrix(unittest.TestCase):
         with self.assertRaises(AssertionError):
             A.add_columns([[0,0]])
         with self.assertRaises(AssertionError):
-            A.add_rows([[0,0,"hello"]])
+            A.add_rows([[0,0,"hello world"]])
         with self.assertRaises(AssertionError):
-            A.add_columns([[0,0,"hello"]])
+            A.add_columns([[0,0,"hello world"]])
         with self.assertRaises(AssertionError):
             A.delete_row(0)
         with self.assertRaises(AssertionError):

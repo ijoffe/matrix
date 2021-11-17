@@ -1,5 +1,4 @@
 # Made by Isaac Joffe
-# TODO: add robust way ofensuring input is valid (elements are numbers)
 
 
 class Matrix:
@@ -23,7 +22,7 @@ class Matrix:
         get_value() :
             gives the value of a specified element of the matrix
         set_value() :
-            changes the avlue fo a specified element of the matrix
+            changes the value of a specified element of the matrix
         check_validity() :
             determines if the matrix's elements are numbers and if each row
             has the same number of elements (number of columns is constant)
@@ -39,6 +38,14 @@ class Matrix:
             adds a list of columns to the matrix
         delete_column(column) :
             deletes a specified column of the matrix
+        scalar_add(number) :
+            adds a specified number to every element of the matrix
+        scalar_multiply(number) :
+            multiplies each element of the matrix by a specified number
+        matrix_add(otherMatrix) :
+            adds two matrices together, producing a new matrix
+        matrix_multiply(otherMatrix) :
+            multiplies two matrices together, producing a new matrix
 
     Example Usage
     -------------
@@ -450,3 +457,127 @@ class Matrix:
         self.check_validity()    # Double check that matrix is still valid
 
         return
+
+    def scalar_add(self, number):
+        """
+        Adds a scalar number to each element of the matrix.
+
+        Parameters
+        ----------
+            number : integer/floating point number
+                the scalar number to be added to the matrix
+
+        Returns
+        -------
+            None, but updates the existing matrix
+        """
+
+        assert isinstance(number, int) or isinstance(number, float), \
+            "Argument must be a number."
+
+        for i in range(len(self.values)):
+            for j in range(len(self.values[i])):
+                self.values[i][j] += number    # Increase each value by number
+        self.check_validity()
+
+        return
+
+    def scalar_multiply(self, number):
+        """
+        Multiplies each element of the matrix by some scalar number.
+
+        Parameters
+        ----------
+            number : integer/floating point number
+                the scalar number for the matrix to be mutiplied by
+
+        Returns
+        -------
+            None, but updates the existing matrix
+        """
+
+        # Ensure argument is valid
+        assert isinstance(number, int) or isinstance(number, float), \
+            "Argument must be a number."
+
+        for i in range(len(self.values)):
+            for j in range(len(self.values[i])):
+                self.values[i][j] *= number    # Multiply each value by number
+        self.check_validity()
+
+        return
+
+    def matrix_add(self, otherMatrix):
+        """
+        Produces the resultant matrix from adding two matrices together.
+
+        Parameters
+        ----------
+            otherMatrix : object of class Matrix
+                the other matrix to be added to the active matrix
+
+        Returns
+        -------
+            newMatrix : object of class Matrix
+                the resultant matrix from the addition of the other matrices
+        """
+
+        # Ensure argument is valid
+        assert isinstance(otherMatrix, Matrix), \
+            "Argument must be a matrix."
+        m1, n1 = self.get_size()
+        m2, n2 = otherMatrix.get_size()
+        assert m1 == m2 and n1 == n2, "Matrices must be the same size."
+
+        # Instantiate the zero matrix of the right size as a placeholder
+        newMatrix = Matrix([[0 for i in range(n1)] for j in range(m1)])
+
+        for i in range(m1):
+            for j in range(n1):
+                # New element value is sum of the value of the elements in the
+                # same location in each input matrix
+                newMatrix.values[i][j] = self.values[i][j] + \
+                    otherMatrix.values[i][j]
+
+        return(newMatrix)
+
+    def matrix_multiply(self, otherMatrix):
+        """
+        Produces the resultant matrix from multiplying two matrices together.
+        To be clear, this method outputs the result of (self * otherMatrix),
+        not (otherMatrix * self).
+
+        Parameters
+        ----------
+            otherMatrix : object of class Matrix
+                the other matrix to be multiplied with the active matrix
+
+        Returns
+        -------
+            newMatrix : object of class Matrix
+                the resultant matrix from the multiplication of the other
+                matrices
+        """
+
+        # Ensure argument is valid
+        assert isinstance(otherMatrix, Matrix), \
+            "Argument must be a matrix."
+        m1, n1 = self.get_size()
+        m2, n2 = otherMatrix.get_size()
+        assert n1 == m2, "Matrices must be of compatible size."
+
+        # Instantiate the zero matrix of the right size as a placeholder
+        newMatrix = Matrix([[0 for i in range(n2)] for j in range(m1)])
+
+        for i in range(m1):
+            for j in range(n2):
+                # New element value is sum of products of corresponding row
+                # and column vectors of the matrices
+                value = 0    # Initially set to zero
+                for k in range(n1):
+                    # Add the value of each relevant product to the cumulative
+                    # value of the new element
+                    value += self.values[i][k] * otherMatrix.values[k][j]
+                newMatrix.values[i][j] = value    # Assign final value
+
+        return(newMatrix)
