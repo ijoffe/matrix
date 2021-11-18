@@ -46,6 +46,8 @@ class Matrix:
             adds two matrices together, producing a new matrix
         matrix_multiply(otherMatrix) :
             multiplies two matrices together, producing a new matrix
+        transpose() :
+            transposes the matrix, producing a new matrix
 
     Example Usage
     -------------
@@ -579,5 +581,32 @@ class Matrix:
                     # value of the new element
                     value += self.values[i][k] * otherMatrix.values[k][j]
                 newMatrix.values[i][j] = value    # Assign final value
+
+        return(newMatrix)
+
+    def transpose(self):
+        """
+        Produces the a matrix equivalent to the transpose of the existing
+        matrix.
+
+        Parameters
+        ----------
+            None
+
+        Returns
+        -------
+            newMatrix : object of class Matrix
+                the transpose of the original matrix
+        """
+
+        # Instantiate the zero matrix of the right size as a placeholder
+        m, n = self.get_size()
+        newMatrix = Matrix([[0 for i in range(m)] for j in range(n)])
+
+        for i in range(m):
+            for j in range(n):
+                # Map each element from the existing matrix to the new location
+                # on the resultant matrix
+                newMatrix.values[j][i] = self.values[i][j]
 
         return(newMatrix)
