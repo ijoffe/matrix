@@ -1,4 +1,5 @@
 # Made by Isaac Joffe
+from copy import deepcopy
 
 
 class Matrix:
@@ -48,6 +49,8 @@ class Matrix:
             multiplies two matrices together, producing a new matrix
         transpose() :
             transposes the matrix, producing a new matrix
+        determinant() :
+            gives the value of the determinant of the matrix
 
     Example Usage
     -------------
@@ -610,3 +613,39 @@ class Matrix:
                 newMatrix.values[j][i] = self.values[i][j]
 
         return(newMatrix)
+
+    def determinant(self):
+        """
+        Computes the determinant of a square matrix.
+
+        Parameters
+        ----------
+            None
+
+        Returns
+        -------
+            value : integer/floating point number
+                the scalar number representing the value of the determinant
+        """
+
+        # Ensure matrix is valid for determinant operation
+        m, n = self.get_size()
+        assert m == n, "Matrix must be square."
+
+        """
+        # Base case
+        if m == 2:
+            value = self.get_value(1, 1)*self.get_value(2, 2) - \
+                self.get_value(1, 2)*self.get_value(2, 1)    # Apply formula ad-bc"""
+        # Base case
+        if m == 1:
+            value = self.get_value(1, 1)    # Determinant is just only value
+        else:
+            value = 0
+            for i in range(m):
+                subMatrix = deepcopy(self)
+                subMatrix.delete_row(1)
+                subMatrix.delete_column(i+1)
+                value += ((-1)**i)*self.get_value(1, i+1)*subMatrix.determinant()
+
+        return(value)

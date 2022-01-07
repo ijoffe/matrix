@@ -12,7 +12,7 @@
 This repository contains the code for a `Matrix` class in Python, allowing for the creation of, manipulation of, and operation on matrices.
 
 ## Description
-The aim of the project is to create a user-defined class to represent a matrix. This class has basic functionality, such as the ability to add, remove, delete, and overwrite matrix rows, columns, and elements, but it also has a growing number of more advanced methods. Currently, the transpose operation, scalar addition and multiplication as well as matrix addition and multiplication are supported, and I plan to add more functionality, such as the ability to compute the determinant and inverse of a matrix.
+The aim of the project is to create a user-defined class to represent a matrix. This class has basic functionality, such as the ability to add, remove, delete, and overwrite matrix rows, columns, and elements, but it also has a growing number of more advanced methods. Currently, the transpose operation, determinant computation, scalar addition and multiplication as well as matrix addition and multiplication are supported, and I plan to add more functionality, such as the ability to compute the inverse of a matrix.
 
 ## Background
 My first introduction to computer programming was in my first year of the Engineering program at the University of Alberta. All engineering students had to take ENCMP 100, a coding class based around the language MATLAB, short for matrix laboratory. As the name suggests, much of what one can do in this language, especially what we focused on for our general engineering purposes in that class, revolves around the built-in matrix data type. 
@@ -39,4 +39,5 @@ print(my_matrix)    # Prints a readable representation of the matrix
 
 my_matrix = my_matrix.transpose()    # Transposes matrix
 print(my_matrix)    # Prints a readable representation of the matrix
+print(my_matrix.determinant())    # Prints the scalar determinant of a matrix
 ```
