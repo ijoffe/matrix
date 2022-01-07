@@ -9,7 +9,7 @@
 * [Example Usage](#example-usage)
 
 ## General Info
-This repository contains the code for a `Matrix` class in Python, allowing for the creation of, manipulation of, and operation on matrices. All code was created by me, Isaac Joffe, in November of 2021.
+This repository contains the code for a `Matrix` class in Python, allowing for the creation of, manipulation of, and operation on matrices. All code was created by me, Isaac Joffe, from November of 2021 to January of 2022.
 
 ## Description
 The aim of the project is to create a user-defined class to represent a matrix. This class has basic functionality, such as the ability to add, remove, delete, and overwrite matrix rows, columns, and elements, but it also has a growing number of more advanced methods. Currently, the transpose operation, determinant computation, scalar addition and multiplication as well as matrix addition and multiplication are supported, and I plan to add more functionality, such as the ability to compute the inverse of a matrix.
