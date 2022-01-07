@@ -632,20 +632,18 @@ class Matrix:
         m, n = self.get_size()
         assert m == n, "Matrix must be square."
 
-        """
-        # Base case
-        if m == 2:
-            value = self.get_value(1, 1)*self.get_value(2, 2) - \
-                self.get_value(1, 2)*self.get_value(2, 1)    # Apply formula ad-bc"""
-        # Base case
-        if m == 1:
+        if m == 1:    # Base case of recursion
             value = self.get_value(1, 1)    # Determinant is just only value
-        else:
+        else:    # Apply method of cofactor expansion
             value = 0
             for i in range(m):
                 subMatrix = deepcopy(self)
+                # Consider the sub matrix without the row and column that the
+                # present element is in
                 subMatrix.delete_row(1)
                 subMatrix.delete_column(i+1)
-                value += ((-1)**i)*self.get_value(1, i+1)*subMatrix.determinant()
+                # Formula applies negative as needed, includes factor of
+                # present element, and makes recursive call for the sub matrix
+                value += (-1)**i*self.get_value(1, i+1)*subMatrix.determinant()
 
         return(value)
