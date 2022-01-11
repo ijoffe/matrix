@@ -1,4 +1,4 @@
-# The file matrix.py, the UnitTests subdirectory, and the makefile must be in
+# The file matrix.py, the test files, and the makefile must be in
 # the same directory
 # further tests will be added as more functionality is established
 
