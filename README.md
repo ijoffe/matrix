@@ -1,14 +1,14 @@
 # Matrix in Python
 
 ## Table of Contents
-* [General Info](#general-info)
+* [General Information](#general-information)
 * [Description](#description)
 * [Background](#background)
 * [Technologies](#technologies)
 * [Instructions](#instructions)
 * [Example Usage](#example-usage)
 
-## General Info
+## General Information
 This repository contains the code for a `Matrix` class in Python, allowing for the creation of, manipulation of, and operation on matrices. All code was created by me, Isaac Joffe, from November of 2021 to January of 2022.
 
 ## Description
