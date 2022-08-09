@@ -1,7 +1,7 @@
 # Matrix
 
 ## Table of Contents
-* [General Information](#general-information)
+* [General Info](#general-info)
 * [Description](#description)
 * [Background](#background)
 * [Other Info](#other-info)
