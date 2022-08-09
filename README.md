@@ -1,15 +1,13 @@
-# Matrix in Python
+# Matrix
 
 ## Table of Contents
 * [General Info](#general-info)
 * [Description](#description)
 * [Background](#background)
-* [Technologies](#technologies)
-* [Instructions](#instructions)
-* [Example Usage](#example-usage)
+* [Other Info](#other-info)
 
 ## General Info
-This repository contains the code for a `Matrix` class in Python, allowing for the creation of, manipulation of, and operation on matrices. All code was created by me, Isaac Joffe, in November of 2021.
+This repository contains the code for a `Matrix` class in Python and C++, allowing for the creation of, manipulation of, and operation on matrices. All code was created by me, Isaac Joffe, from November 2021 - March 2022.
 
 ## Description
 The aim of the project is to create a user-defined class to represent a matrix. This class has basic functionality, such as the ability to add, remove, delete, and overwrite matrix rows, columns, and elements, but it also has a growing number of more advanced methods. Currently, the transpose operation, determinant computation, scalar addition and multiplication as well as matrix addition and multiplication are supported, and I plan to add more functionality, such as the ability to compute the inverse of a matrix.
@@ -17,27 +15,7 @@ The aim of the project is to create a user-defined class to represent a matrix. 
 ## Background
 My first introduction to computer programming was in my first year of the Engineering program at the University of Alberta. All engineering students had to take ENCMP 100, a coding class based around the language MATLAB, short for matrix laboratory. As the name suggests, much of what one can do in this language revolves around the built-in matrix data type. This was especially true for what we focused on for our general engineering purposes in that class. 
 
-When I specialized in Computer Engineering, I took the class CMPUT 274, which is based in Python. Up until this point, my only programming experience was in MATLAB, so I had assumed matrices were a fairly universal data type. When I learned Python did not have such a data type, I decided to implement one myself.
+When I specialized in Computer Engineering, I took the classes CMPUT 274 and CMPUT 275, which are based in Python and C++ respectively. Up until this point, my only programming experience was in MATLAB, so I had assumed matrices were a fairly universal data type. When I learned Python and C++ did not have such data types, I decided to implement one myself.
 
-## Technologies
-All code contained is written in Python 3.8.10, except for the makefile used to run unit tests. I created all the code and files in this repository using my personal virtual machine, which runs the Ubuntu distribution of the Linux operating system, through the Sublime Text text editor and the Linux terminal window.
-
-## Instructions
-Currently, the program can only be used directly through a Python interpreter. Upon entering the Python interpreter using `python3` in the Linux terminal window, you can import the class using `from matrix import Matrix` and begin to use the functionality of the class by instantiating objects and operating on them.
-
-Additionally, unit tests are available to test the functionality of the program. The provided makefile allows for the execution of all the available tests at once. To run all the tests, in the Linux terminal type `make` while in the proper directory.
-
-## Example Usage
-```python
-from matrix import Matrix
-
-my_matrix = Matrix([[1,2,3],[4,5,6]])    # Instantiates a 2 x 3 matrix
-print(my_matrix)    # Prints a readable representation of the matrix
-
-my_matrix.add_row([7,8,9])    # Appends another row to the bottom
-print(my_matrix)    # Prints a readable representation of the matrix
-
-my_matrix = my_matrix.transpose()    # Transposes matrix
-print(my_matrix)    # Prints a readable representation of the matrix
-print(my_matrix.determinant())    # Prints the scalar determinant of a matrix
-```
+## Other Info
+Specifics on the technologies being utilized as well as instructions and example usage can be found in the READMEs inside the folders for each implementation.
